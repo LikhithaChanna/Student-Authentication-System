@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration</title>
+
+    <!-- CSS File -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <div class="logo-section">
+
+            <div class="logo">🎓</div>
+
+            <div>
+                <h2>Student Auth</h2>
+                <p>Learn · Grow · Achieve</p>
+            </div>
+
+        </div>
+
+        <div class="nav-links">
+            <a href="/">⌂ Home</a>
+            <a href="#about">ⓘ About</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Registration Container -->
+    <main class="signup-container">
+
+        <section class="signup-card">
+
+            <div class="user-icon">👤</div>
+
+            <h1>Create Account</h1>
+
+            <p class="subtitle">
+                Register to access your student account
+            </p>
+
+
+            <!-- Registration Message -->
+            {% if message %}
+
+                <p class="form-message {{ message_type }}">
+                    {{ message }}
+                </p>
+
+            {% endif %}
+
+
+            <!-- Registration Form -->
+            <form action="{{ url_for('signup') }}"
+                  method="POST"
+                  id="signupForm">
+
+
+                <!-- Full Name -->
+                <input
+                    type="text"
+                    name="full_name"
+                    placeholder="Enter Full Name"
+                    required
+                >
+
+
+                <!-- Email -->
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter Email ID"
+                    required
+                >
+
+
+                <!-- Username -->
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Create Username"
+                    required
+                >
+
+
+                <!-- Create Password -->
+                <div class="input-box">
+
+                    <span>🔒</span>
+
+                    <input
+                        type="password"
+                        id="signupPassword"
+                        name="password"
+                        placeholder="Create Password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword('signupPassword', this)"
+                        title="Show Password"
+                        aria-label="Show password"
+                    >
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+
+                </div>
+
+
+                <!-- Confirm Password -->
+                <div class="input-box">
+
+                    <span>🔒</span>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirm_password"
+                        placeholder="Confirm Password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword('confirmPassword', this)"
+                        title="Show Password"
+                        aria-label="Show password"
+                    >
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+
+                </div>
+
+
+                <!-- Register Button -->
+                <button type="submit" class="signin-button">
+                    Register →
+                </button>
+
+            </form>
+
+
+            <!-- Back to Login -->
+            <div class="signup-text">
+
+                Already have an account?
+
+                <a href="/">Back to Login</a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        // Show and Hide Password
+        function togglePassword(id, button) {
+
+            const password = document.getElementById(id);
+            const icon = button.querySelector("i");
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+
+                button.title = "Hide Password";
+                button.setAttribute("aria-label", "Hide password");
+
+            }
+
+            else {
+
+                password.type = "password";
+
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+
+                button.title = "Show Password";
+                button.setAttribute("aria-label", "Show password");
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

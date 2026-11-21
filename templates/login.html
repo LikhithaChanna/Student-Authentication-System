@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinSight</title>
+
+    <!-- CSS File -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <div class="logo-section">
+
+            <div class="logo">🎓</div>
+
+            <div>
+                <h2>Student Auth</h2>
+                <p>Learn · Grow · Achieve</p>
+            </div>
+
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="#">About</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Main Container -->
+    <div class="main-container">
+
+
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+
+            <h1>
+                Student Authentication
+                <span>System</span>
+            </h1>
+
+            <h2>Your Journey. Our Priority.</h2>
+
+            <p class="tagline">
+                Secure access to your student account.
+            </p>
+
+            <p class="description">
+                Learn, grow and achieve your goals with
+                a simple and secure student portal.
+            </p>
+
+            <div class="education-art">
+                📚 🎓 💻
+            </div>
+
+        </div>
+
+
+
+        <!-- Login Card -->
+        <div class="login-card">
+
+            <div class="user-icon">👤</div>
+
+            <h1>Welcome Back!</h1>
+
+            <p class="subtitle">
+                Please sign in to your account
+            </p>
+
+
+            <!-- Login Message -->
+            {% if message %}
+
+                <p class="form-message {{ message_type }}">
+                    {{ message }}
+                </p>
+
+            {% endif %}
+
+
+
+            <!-- Login Form -->
+            <form action="/" method="POST" id="loginForm">
+
+
+                <!-- Username Field -->
+                <div class="input-box">
+
+                    <span>👤</span>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Enter Username"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Password Field -->
+                <div class="input-box">
+
+                    <span>🔒</span>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        name="password"
+                        placeholder="Enter Password"
+                        required
+                    >
+
+                    <!-- Eye Icon -->
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword()"
+                        title="Show Password"
+                        aria-label="Show password"
+                    >
+
+                        <i class="fa-solid fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- Sign In Button -->
+                <button type="submit" class="signin-button">
+                    Sign In →
+                </button>
+
+            </form>
+
+
+
+            <!-- Sign Up -->
+            <p class="signup-text">
+
+                Don't have an account?
+
+                <a href="{{ url_for('signup') }}">
+                    Sign Up
+                </a>
+
+            </p>
+
+
+
+            <!-- Bottom Buttons -->
+            <div class="bottom-buttons">
+
+                <button type="button" onclick="clearForm()">
+                    Clear
+                </button>
+
+                <button type="button" onclick="exitApplication()">
+                    Exit
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- JavaScript -->
+    <script>
+
+
+        // Show and Hide Password
+        function togglePassword() {
+
+            const password =
+                document.getElementById("loginPassword");
+
+            const icon =
+                document.querySelector(".show-password i");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+
+            }
+
+            else {
+
+                password.type = "password";
+
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+
+            }
+
+        }
+
+
+
+        // Clear Login Form
+        function clearForm() {
+
+            document.getElementById("loginForm").reset();
+
+            const password =
+                document.getElementById("loginPassword");
+
+            password.type = "password";
+
+            const icon =
+                document.querySelector(".show-password i");
+
+            icon.className = "fa-solid fa-eye";
+
+        }
+
+
+
+        // Exit Application
+        function exitApplication() {
+
+            if (confirm("Are you sure you want to exit?")) {
+
+                window.location.href = "about:blank";
+
+            }
+
+        }
+
+
+    </script>
+
+</body>
+</html>
